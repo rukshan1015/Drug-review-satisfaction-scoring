@@ -74,7 +74,7 @@ We evaluated Linear Regression, Lasso, Ridge, ElasticNet, and XGBoost using two 
 | **MAE** | **0.865** |
 
 ### 🏆 Key Takeaway
-Compared to the best classical baseline (Ridge with $R^2 \approx 0.503$), **DistilBERT achieves $R^2 \approx 0.805$**. RMSE drops significantly from ~2.32 to **1.45**, demonstrating the value of modern transformers for capturing nuanced medical sentiment[cite: 184, 185].
+Compared to the best classical baseline (Ridge with $R^2 \approx 0.503$), **DistilBERT achieves $R^2 \approx 0.805$**. RMSE drops significantly from ~2.32 to **1.45**, demonstrating the value of modern transformers for capturing nuanced medical sentiment.
 
 ---
 
