@@ -42,34 +42,38 @@ def predict_rating(text, max_length=128):
     return preds.tolist()
 
 
-def gradio_predict(review_text: str) -> str:
-   
+def gradio_predict(drug_name: str, condition: str, review_text: str) -> str:
     if not review_text.strip():
         return "Please enter a review."
 
-    score = predict_rating(review_text)
+    # same pattern used for training
+    full_text = f"Drug: {drug_name}. Condition: {condition}. Review: {review_text}"
+
+    score = predict_rating(full_text)
     return f"Predicted satisfaction rating: {score:.2f} (scale 1–10)"
 
 
-# Build Gradio UI
+# Building Gradio UI
+
+
 demo = gr.Interface(
     fn=gradio_predict,
-    inputs=gr.Textbox(
-        lines=6,
-        label="Enter drug review",
-        placeholder='Example: "It has no side effect, I take it in combination with Bystolic 5 mg and Fish Oil."'
-    ),
-    outputs=gr.Textbox(
-        label="Model prediction"
-    ),
+    inputs=[
+        gr.Textbox(label="Drug name", placeholder="e.g., Valsartan"),
+        gr.Textbox(label="Condition", placeholder="e.g., Hypertension"),
+        gr.Textbox(
+            lines=6,
+            label="Review",
+            placeholder='e.g., "It has no side effect, I take it in combination..."'
+        ),
+    ],
+    outputs=gr.Textbox(label="Model prediction"),
     title="Drug Review Satisfaction Scorer",
-    description=(
-        "Fine-tuned DistilBERT model that predicts a 1–10 satisfaction rating "
-        "from free-text patient drug reviews."
-    )
+    description="Predicts a 1–10 satisfaction rating using a fine-tuned DistilBERT model."
 )
 
 
 if __name__ == "__main__":
     # Launch local Gradio app
-    demo.launch()
+    #demo.launch()
+    demo.launch(server_name="0.0.0.0", server_port=7860)
