@@ -105,7 +105,28 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 model_id = "rukshan1015/drug-review-bert-regression-fullmodel"  
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 model = AutoModelForSequenceClassification.from_pretrained(model_id)
+
 ```
+---
+
+## 🐳 Run with Docker
+
+You can also run the Gradio app inside a Docker container.
+
+Build the image:
+
+```bash
+docker build -t drug-rating-app .
+```
+Run the container:
+
+```
+docker run --rm -p 7860:7860 drug-rating-app
+```
+Then open: http://localhost:7860 in your browser to use the app
+
+---
+
 ---
 
 ## 📓 Training Code
