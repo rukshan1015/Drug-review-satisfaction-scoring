@@ -1,56 +1,32 @@
-# Drug Review Satisfaction Scoring with DistilBERT (1–10 Regression)
+# 🏥 Agentic Clinical Safety Auditor: Hybrid ML & LangGraph Workflow
 
-This project fine-tunes a **DistilBERT** model to predict a **1–10 satisfaction rating** from free-text drug reviews[cite: 1, 2]. It is **Stage 1** of a larger plan to turn patient reviews into an overall satisfaction score (regression), with future work focused on aspect-based satisfaction[cite: 3, 4, 5].
-
----
-
-## 🏥 Business Problem (Medical Executive Perspective)
-
-Healthcare authorities and drug manufacturers face several challenges when it comes efficacy and effectiveness of a drug from pateint's point of view. They inlcude,
-* Receiving **thousands of patient reviews** across many medications, but no resouces have been allocated to read them all.
-* Simple numeric ratings don’t explain **why** patients are unhappy.
-* By the time low satisfaction shows up in formal surveys, it may already be hurting adherence, increasing call-center volume, and affecting institutional satisfaction scores
-
-**The Solution:**
-You need a way to **convert unstructured patient reviews into a numeric satisfaction signal** that can be tracked over time and compared across drugs. This project addresses the first step:
-
-> **Given a free-text drug review, estimate how satisfied the patient is on a 1–10 scale.** 
+This repository hosts an **Agentic AI System** designed for automated pharmacovigilance and patient sentiment analysis. By integrating a fine-tuned **DistilBERT regression model** with a **LangGraph-orchestrated auditor**, the system transforms unstructured drug reviews into actionable clinical signals and safety alerts.
 
 ---
 
-## 🔍 Problem Definition
+## 🚀 Key Innovation: Agentic Orchestration
+Moving beyond simple "sentiment scoring," this project implements a **Multi-Agent State Machine** to solve the "Black Box" problem in clinical AI:
+* [cite_start]**The Specialist Node (BERT):** A high-precision regression model (1–10 scale) that detects the "what" (Satisfaction Score). [cite: 56]
+* **The Auditor Node (LangGraph):** An autonomous logic-gate that triggers deep-dive analysis and Adverse Event (AE) extraction for low-satisfaction scores.
 
-### Inputs
-We explored two input variants:
-1.  **Review only**:  
-    `"It has no side effect, I take it in combination of Bystolic 5 mg..."` 
-2.  **Drug + Condition + Review**:  
-    "Drug: Valsartan. Condition: Hypertension. Review: It has no side effect..."` 
+## 🧠 Architecture
+The core logic is managed by a stateful graph that ensures reliability and prevents infinite processing loops.
+![Graph Architecture](output.png)
 
-### Output
-A continuous satisfaction score from **1 to 10**, where:
-* **1** = Very Dissatisfied
-* **10** = Very Satisfied 
-
-This allows us to score reviews even when patients don't provide a numeric rating and aggregate predictions across conditions or time periods.
 
 ---
 
-## 🧹 Data & Preprocessing
-
-* **Dataset:** Drug review dataset containing `review` (text), `rating` (1–10), and optional `drugName`/`condition`.
-    * *Source:* Kaggle (https://www.kaggle.com/datasets/jessicali9530/kuc-hackathon-winter-2018)
-* **Splits:** Train / Validation / Test (e.g., 80/10/10).
-* **Text Cleaning:** Minimal cleaning for transformers. We strip extra whitespace but keep punctuation, numbers, and units (e.g., "5 mg", "3/10") without aggressive symbol removal.
+## 🧪 Enterprise Use Case (Clinical & Business ROI)
+In a global pharmaceutical context, unstructured feedback is often too voluminous for manual review. This system provides:
+* **Automated Pharmacovigilance:** Immediate flagging of high-risk adverse reactions.
+* **Resource Optimization:** Directing human medical reviewers only to reviews flagged by the Auditor Node.
+* **Quantitative Benchmarking:** Comparing drug efficacy across conditions using standardized 1–10 metrics.
 
 ---
 
-## 📊 Model Comparison & Results
+## 📊 Model Performance: Transformers vs. Baselines
 
-This project compares classical baselines against a transformer-based model[cite: 58].
-
-### 1. Classical Models
-We evaluated Linear Regression, Lasso, Ridge, ElasticNet, and XGBoost using two feature sets: **TF–IDF** and **Word2Vec**.
+To ensure clinical-grade accuracy, we benchmarked the **DistilBERT** model against linear Regression, Lasso, Ridge, ElasticNet, and XGBoost using two feature sets: **TF–IDF** and **Word2Vec**.
 
 | Feature Set | Input Format | Best Model | $R^2$ | RMSE | MAE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -60,21 +36,39 @@ We evaluated Linear Regression, Lasso, Ridge, ElasticNet, and XGBoost using two 
 | **Word2Vec** | Drug + Cond + Rev | XGBoost | 0.459 | 2.42 | 1.91 |
 
 
+**Insight:** The transformer-based approach captured nuanced medical sentiment that classical frequency-based models missed, reducing RMSE by **37%**.
 >**Observation:** Averaged Word2Vec embeddings underperformed TF–IDF. Averaging compresses long reviews into a single vector, losing specific high-signal phrases like "no side effects" that TF–IDF retains.
 
-### 2. Transformer Model (DistilBERT)
-* **Base Model:** `distilbert-base-uncased`
-* **Objective:** Regression on the 1–10 rating (MSE loss)
+---
 
-#### Test Set Metrics
-| Metric | Value |
-| :--- | :--- |
-| **$R^2$** | **0.805** |
-| **RMSE** | **1.450** |
-| **MAE** | **0.865** |
+## 🛠 Tech Stack & Infrastructure
+Designed for **Hybrid-Cloud and On-Premises** deployment, ensuring data sovereignty for sensitive medical data.
 
-### 🏆 Key Takeaway
-Compared to the best classical baseline (Ridge with $R^2 \approx 0.503$), **DistilBERT achieves $R^2 \approx 0.805$**. RMSE drops significantly from ~2.32 to **1.45**, demonstrating the value of modern transformers for capturing nuanced medical sentiment.
+* [cite_start]**Core AI:** Python, PyTorch, Transformers (BERT), LangGraph. [cite: 22, 29, 30]
+* [cite_start]**MLOps:** Docker, FastAPI, AWS SageMaker, AWS Step Functions. [cite: 25, 31, 32]
+* **UI/UX:** Gradio (Deployable on Hugging Face Spaces). 
+
+---
+
+## 🐳 Deployment & Inference
+
+### 1. Live Recruiter Demo (Hugging Face)
+Run the live Agentic Auditor here: **[https://huggingface.co/spaces/rukshan1015/clinical-safety-auditor]**
+
+### 2. Local Containerized Deployment (On-Premises)
+This system is ready for local infrastructure using Docker:
+```bash
+docker build -t clinical-auditor-app .
+docker run --rm -p 7860:7860 clinical-auditor-app
+```
+---
+
+## 🧹 Data & Preprocessing
+
+* **Dataset:** Drug review dataset containing `review` (text), `rating` (1–10), and optional `drugName`/`condition`.
+    * *Source:* Kaggle (https://www.kaggle.com/datasets/jessicali9530/kuc-hackathon-winter-2018)
+* **Splits:** Train / Validation / Test (e.g., 80/10/10).
+* **Text Cleaning:** Minimal cleaning for transformers. We strip extra whitespace but keep punctuation, numbers, and units (e.g., "5 mg", "3/10") without aggressive symbol removal.
 
 ---
 
@@ -97,7 +91,7 @@ pip install -r requirements.txt
 
 The fine-tuned DistilBERT model is hosted on Hugging Face Hub (weights are not stored in this repo).
 
-You can use the provided script `src/infer_rating.py` which launches a simple Gradio UI, or run Python code directly:
+You can use the provided script `src/infer_rating_agent.py` which launches a simple Gradio UI, or run Python code directly:
 
 ```python
 from transformers import AutoTokenizer, AutoModelForSequenceClassification

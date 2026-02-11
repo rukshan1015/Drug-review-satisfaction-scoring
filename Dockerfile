@@ -16,4 +16,4 @@ COPY ui ./ui
 
 EXPOSE 7860
 
-CMD ["python", "ui/infer_rating.py"]
+CMD ["python", "ui/infer_rating_agent.py"]
