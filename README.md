@@ -6,7 +6,7 @@ This repository hosts an **Agentic AI System** designed for automated pharmacovi
 
 ## 🚀 Key Innovation: Agentic Orchestration
 Moving beyond simple "sentiment scoring," this project implements a **Multi-Agent State Machine** to solve the "Black Box" problem in clinical AI:
-* [cite_start]**The Specialist Node (BERT):** A high-precision regression model (1–10 scale) that detects the "what" (Satisfaction Score). [cite: 56]
+* **The Specialist Node (BERT):** A high-precision regression model (1–10 scale) that detects the "what" (Satisfaction Score). 
 * **The Auditor Node (LangGraph):** An autonomous logic-gate that triggers deep-dive analysis and Adverse Event (AE) extraction for low-satisfaction scores.
 
 ## 🧠 Architecture
