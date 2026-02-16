@@ -49,6 +49,10 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
+          git rm -r --cached models/ || true
+          git rm -r --cached ml/ || true
+          git rm -r --cached notebooks/ || true
+
           echo "models/" >> .gitignore
           echo "ml/" >> .gitignore
           echo "notebooks/" >> .gitignore
