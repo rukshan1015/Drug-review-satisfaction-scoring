@@ -10,11 +10,11 @@ on:
 # Step 2: What should it do?
 jobs:
   build:
-    runs-on: ubuntu-latest  # This tells GitHub to give you a fresh Linux machine
+    runs-on: ubuntu-latest  # Tells GitHub to give a fresh Linux machine
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4  # This "downloads" your repo onto the Linux machine
+      uses: actions/checkout@v4  # "downloads" repo onto the Linux machine
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -31,3 +31,5 @@ jobs:
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+  
+  
