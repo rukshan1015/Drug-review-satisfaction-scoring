@@ -1,14 +1,3 @@
-YAML
----
-title: Clinical Safety Auditor
-emoji: 🚀
-colorFrom: blue
-colorTo: green
-sdk: gradio  # or streamlit
-sdk_version: 4.44.1
-app_file: app.py
-pinned: false
----
 
 # 🏥 Agentic Clinical Safety Auditor: Hybrid ML & LangGraph Workflow
 

@@ -33,38 +33,5 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
 
-  deploy:
-    needs: build  # This ensures we only deploy if the Python check PASSES!
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    - name: Push to HF
-      env:
-        HF_TOKEN: ${{ secrets.HF_TOKEN }}
-      run: |
-
-          # creating a temp folder
-          mkdir ../temp
-          
-          #Copy only the files HF needs into that folder
-          cp ui/infer_rating_agent.py ../temp/app.py
-          cp requirements.txt ../temp/requirements.txt
-          cp -r ui/ ../temp/ui/
-          CO README.md ../temp/README.md 
-
-          #Go into that folder and turn it into a tiny, new Git repo
-          cd ../temp
-          git init -b main
-          #Add the remote and push it to Hugging Face Spaces. The token is used for authentication.
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-
-          git add . 
-          
-          git commit -m "Deploying lean app version to Hugging Face Spaces"
-          git push --force https://rukshan1015:$HF_TOKEN@huggingface.co/spaces/rukshan1015/clinical-safety-auditor main:main
   
   
