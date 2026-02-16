@@ -10,3 +10,4 @@ datasets>=2.19.0
 accelerate>=0.30.0
 gradio>=4.0.0
 huggingface-hub<1.0
+langgraph
