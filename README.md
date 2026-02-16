@@ -1,3 +1,15 @@
+YAML
+---
+title: Clinical Safety Auditor
+emoji: 🚀
+colorFrom: blue
+colorTo: green
+sdk: gradio  # or streamlit
+sdk_version: 4.44.1
+app_file: app.py
+pinned: false
+---
+
 # 🏥 Agentic Clinical Safety Auditor: Hybrid ML & LangGraph Workflow
 
 This repository hosts an **Agentic AI System** designed for automated pharmacovigilance and patient sentiment analysis. By integrating a fine-tuned **DistilBERT regression model** with a **LangGraph-orchestrated auditor**, the system transforms unstructured drug reviews into actionable clinical signals and safety alerts.

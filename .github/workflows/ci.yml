@@ -52,7 +52,8 @@ jobs:
           #Copy only the files HF needs into that folder
           cp ui/infer_rating_agent.py ../temp/app.py
           cp requirements.txt ../temp/requirements.txt
-          cp -r ui/ ../temp/ui/ 
+          cp -r ui/ ../temp/ui/
+          CO README.md ../temp/README.md 
 
           #Go into that folder and turn it into a tiny, new Git repo
           cd ../temp
