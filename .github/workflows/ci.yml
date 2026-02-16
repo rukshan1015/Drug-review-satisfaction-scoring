@@ -47,14 +47,15 @@ jobs:
       run: |
 
           # creating a temp folder
-          mkdir temp
+          mkdir ../temp
           
           #Copy only the files HF needs into that folder
-          cp ui/infer_rating_agent.py temp/app.py
-          cp requirements.txt temp/requirements.txt
+          cp ui/infer_rating_agent.py ../temp/app.py
+          cp requirements.txt ../temp/requirements.txt
+          cp -r ui/ ../temp/ui/ 
 
           #Go into that folder and turn it into a tiny, new Git repo
-          cd temp
+          cd ../temp
           git config user.name github-actions
           git config user.email github-actions@github.com
 
