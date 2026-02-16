@@ -63,7 +63,7 @@ Designed for **Hybrid-Cloud and On-Premises** deployment, ensuring data sovereig
 ## 🐳 Deployment & Inference
 
 ### 1. Live Recruiter Demo (Hugging Face)
-Run the live Agentic Auditor here: **[https://huggingface.co/spaces/rukshan1015/clinical-safety-auditor]**
+Run the live Agentic Auditor here: **[https://huggingface.co/spaces/rukshan1015/drug_review]**
 
 ### 2. Local Containerized Deployment (On-Premises)
 This system is ready for local infrastructure using Docker:
