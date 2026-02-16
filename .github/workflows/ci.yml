@@ -45,20 +45,22 @@ jobs:
       env:
         HF_TOKEN: ${{ secrets.HF_TOKEN }}
       run: |
-          cp ui/infer_rating_agent.py app.py
+
+          # creating a temp folder
+          mkdir temp
+          
+          #Copy only the files HF needs into that folder
+          cp ui/infer_rating_agent.py temp/app.py
+          cp requirements.txt temp/requirements.txt
+
+          #Go into that folder and turn it into a tiny, new Git repo
+          cd temp
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          git rm -r --cached models/ || true
-          git rm -r --cached ml/ || true
-          git rm -r --cached notebooks/ || true
-
-          echo "models/" >> .gitignore
-          echo "ml/" >> .gitignore
-          echo "notebooks/" >> .gitignore
-
-          git add app.py .gitignore ui/ 
-          git commit -m "Deploying latest update"
-          git push --force https://rukshan1015:$HF_TOKEN@huggingface.co/spaces/rukshan1015/clinical-safety-auditor main
+          git add . 
+          
+          git commit -m "Deploying lean app version to Hugging Face Spaces"
+          git push --force https://rukshan1015:$HF_TOKEN@huggingface.co/spaces/rukshan1015/clinical-safety-auditor main:main
   
   
