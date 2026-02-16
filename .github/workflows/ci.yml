@@ -56,7 +56,7 @@ jobs:
 
           #Go into that folder and turn it into a tiny, new Git repo
           cd ../temp
-          git init
+          git init -b main
           #Add the remote and push it to Hugging Face Spaces. The token is used for authentication.
           git config user.name github-actions
           git config user.email github-actions@github.com
