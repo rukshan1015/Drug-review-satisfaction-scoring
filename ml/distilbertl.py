@@ -16,6 +16,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from transformers import TrainingArguments
 from transformers import Trainer
 import joblib
+import shutil
 
 test = pd.read_csv(r"/content/drugsComTest_raw.csv")
 train = pd.read_csv(r"/content/drugsComTrain_raw.csv")
@@ -120,7 +121,11 @@ print(metrics)
 
 print(trainer.state.best_model_checkpoint)
 
-!zip -r bert-drug-rating-final.zip bert-drug-rating/checkpoint-24195
+
+
+# Does exactly what the zip command did, but in "Pure Python"
+shutil.make_archive('bert-drug-rating-final', 'zip', 'bert-drug-rating/checkpoint-24195')
+# !zip -r bert-drug-rating-final.zip bert-drug-rating/checkpoint-24195
 
 from google.colab import files
 files.download("bert-drug-rating-final.zip")
