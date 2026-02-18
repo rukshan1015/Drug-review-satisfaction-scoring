@@ -4,3 +4,4 @@ data/
 .ipython/
 .dockerignore
 notebooks/
+.notebooks/
