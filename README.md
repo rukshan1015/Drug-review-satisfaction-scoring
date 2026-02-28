@@ -1,5 +1,6 @@
 ﻿---
 title: Clinical Safety Auditor
+emoji: 🏥
 colorFrom: blue
 colorTo: green
 sdk: gradio
